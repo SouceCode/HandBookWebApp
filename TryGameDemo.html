@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+
+<title>Document</title>
+</head>
+<body>
+  <table class="table"  id="table"  ></table>
+  
+</body>
+<script>
+
+$(document).ready(function () {
+    // $.get("http://39.106.55.171:5000/Api/Game_Settings/",function (data) {
+    //     alert(data);
+    //     //zTreeObj = $.fn.zTree.init($("#menuTree"), setting, data);
+    //  })
+   
+
+    var sql = "select * from Game_Settings gs";
+            var wherestr = " where 1=1 And devices=1 ";//devices：0电脑1手机
+            var orderbystr = "    order by deadLine asc ";
+            sql += wherestr;
+            sql += orderbystr;
+          var  urlstr = "http://localhost:5000/Api/Game_Settings/GetGame_SettingsPageData?pageindex=0"+"&sqlstr="+ sql + "&size=20";
+
+     $.ajax({
+        type: "get",
+        dataType: "json",
+        url:urlstr,
+        success: function (data) {
+            // alert(" 错误信息：" + data);
+            $('#table tr:gt(0)').remove();
+            var s = '<tr><th>试玩地址</th><th>账号</th><th>密码</th><th>试玩类型</th><th>截至日期</th><th>备注</th></tr>';
+
+            for (var i = 0; i < data.length; i++) s += '<tr><td><span>' + data[i].url + '</span></td><td><span>' +  data[i].userName + '</span></td><td><span>' +  data[i].passWord + '</span></td>'
+                + '<td><span>' +  data[i].tryType + '</span></td><td><span>' + data[i].deadLine+ '</span></td><td><span>' + data[i].reMark+ '</span></td></tr>';
+            $('#table').append(s);
+        },
+        error: function (XMLResponse) {
+            // alert(" 错误信息：" + XMLResponse.responseText);
+        }
+    });
+
+//     $.ajax({
+//         type: "get",
+//         dataType: "json",
+//         url: "http://localhost:5000/Api/Game_Settings/",
+//         success: function (data) {
+//             var f = document.getElementById("tablegamesettings"); 
+//             var childs =  f.childNodes; 
+// for(var i = 0; i < childs.length; i++) { 
+// //   alert(childs[i].nodeName); 
+//   f.removeChild(childs[i]); 
+// }
+//             var s = '  <div class=\"row\">';
+
+//             for (var i = 0; i < data.length; i++)
+//             s+='<div class=\'col-sm-4\'>'+' <h3>'+data[i].url+'</h3>'+' <p>'+data[i].userName+'</p>'+' <p>'+data[i].passWord+'</p>'+' <p>'+data[i].tryType+'</p>'+' <p>'+ data[i].deadLine+'</p>'+' <p>'+ data[i].reMark+'</p></div>'
+            
+//                 s+='</div>';
+//                     $('#tablegamesettings').append(s);
+//         },
+//         error: function (XMLResponse) {
+//             // alert(" 错误信息：" + XMLResponse.responseText);
+//         }
+//     });
+ 
+});
+</script>
+</html>
