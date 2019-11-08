@@ -8,6 +8,7 @@
 
     <script src="./JS/jquery/3.4.1/jquery.min.js"></script>
     <script src="./JS/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./JS/fns/Setting.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -15,6 +16,8 @@
    
 </body>
 <script>
+    var apiurl='';//Api地址  全局变量
+
     //复制内容
     function clickthis(obj){
 //   alert(obj[0].innerHTML);
@@ -28,8 +31,7 @@ let oInput = document.createElement('input')
         // window.alert('复制成功')
 }
     $(document).ready(function () {
-     
-    
+        f_apiurl();
         var sql = "select * from Game_Settings gs";
                 var wherestr = " where 1=1 And devices=1 And IsCompleted=0";
                 //devices：0电脑1手机
@@ -37,7 +39,7 @@ let oInput = document.createElement('input')
                 var orderbystr = "    order by deadLine asc ";
                 sql += wherestr;
                 sql += orderbystr;
-              var  urlstr = "http://localhost:5000/Api/Game_Settings/GetGame_SettingsPageData?pageindex=0"+"&sqlstr="+ sql + "&size=20";
+              var  urlstr = apiurl+"/Api/Game_Settings/GetGame_SettingsPageData?pageindex=0"+"&sqlstr="+ sql + "&size=20";
     
          $.ajax({
             type: "get",

@@ -17,8 +17,10 @@
   
 </body>
 <script>
-
+var apiurl='';//Api地址 全局变量
 $(document).ready(function () {
+    f_apiurl();
+
     // $.get("http://localhost:5000/Api/Game_Settings/",function (data) {
     //     alert(data);
     //     //zTreeObj = $.fn.zTree.init($("#menuTree"), setting, data);
@@ -32,7 +34,7 @@ $(document).ready(function () {
             var orderbystr = "    order by deadLine asc ";
             sql += wherestr;
             sql += orderbystr;
-          var  urlstr = "http://localhost:5000/Api/Game_Settings/GetGame_SettingsPageData?pageindex=0"+"&sqlstr="+ sql + "&size=20";
+          var  urlstr =  apiurl+"/Api/Game_Settings/GetGame_SettingsPageData?pageindex=0"+"&sqlstr="+ sql + "&size=20";
 
      $.ajax({
         type: "get",
