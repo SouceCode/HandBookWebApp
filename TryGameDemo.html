@@ -8,9 +8,9 @@
 
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
-
-<title>Document</title>
+    <script src="./JS/global/fns/setting.js"></script>
+    <script src="./JS/global/enums.js"></script>
+<title>试玩手游</title>
 </head>
 <body>
   <table class="table"  id="table"  ></table>
@@ -46,7 +46,7 @@ $(document).ready(function () {
             var s = '<tr><th>试玩地址</th><th>账号</th><th>密码</th><th>试玩类型</th><th>截至日期</th><th>备注</th></tr>';
 
             for (var i = 0; i < data.length; i++) s += '<tr><td><span>' + data[i].url + '</span></td><td><span>' +  data[i].userName + '</span></td><td><span>' +  data[i].passWord + '</span></td>'
-                + '<td><span>' +  data[i].tryType + '</span></td><td><span>' + data[i].deadLine+ '</span></td><td><span>' + data[i].reMark+ '</span></td></tr>';
+                + '<td><span>' +  GetTryTypeEnum(data[i].tryType)+ '</span></td><td><span>' + data[i].deadLine+ '</span></td><td><span>' + data[i].reMark+ '</span></td></tr>';
             $('#table').append(s);
         },
         error: function (XMLResponse) {

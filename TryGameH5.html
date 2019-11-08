@@ -8,8 +8,9 @@
 
     <script src="./JS/jquery/3.4.1/jquery.min.js"></script>
     <script src="./JS/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="./JS/fns/Setting.js"></script>
-    <title>Document</title>
+    <script src="./JS/global/fns/setting.js"></script>
+    <script src="./JS/global/enums.js"></script>
+    <title>试玩手游</title>
 </head>
 <body>
   <div id='container'></div>
@@ -64,7 +65,7 @@ let oInput = document.createElement('input')
                     s += '<ul>'
                     s += ' <li onclick=\'clickthis($(this))\'>账号：' + data[i].userName + '</li>';
                     s += ' <li onclick=\'clickthis($(this))\'>密码：' + data[i].passWord + '</li>';
-                    s += ' <li onclick=\'clickthis($(this))\'>试玩类型：' + data[i].tryType + '</li>';
+                    s += ' <li onclick=\'clickthis($(this))\'>试玩类型：' + GetTryTypeEnum(data[i].tryType) + '</li>';
                     s += ' <li onclick=\'clickthis($(this))\'>截至日期：' + data[i].deadLine + '</li>';
                     s += ' <li onclick=\'clickthis($(this))\'>备注：' + data[i].reMark + '</li>';
                     s += '   </ul>';
