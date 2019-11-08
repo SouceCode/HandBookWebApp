@@ -15,7 +15,18 @@
    
 </body>
 <script>
-
+    //复制内容
+    function clickthis(obj){
+//   alert(obj[0].innerHTML);
+let oInput = document.createElement('input')
+        oInput.value = obj[0].innerHTML
+        document.body.appendChild(oInput)
+        oInput.select()
+        document.execCommand("Copy")
+        oInput.style.display = 'none'
+        document.body.removeChild(oInput)
+        // window.alert('复制成功')
+}
     $(document).ready(function () {
      
     
@@ -40,7 +51,6 @@
                     //   alert(childs[i].nodeName); 
                     f.removeChild(childs[i]);
                 }
-              
 
 
                 var s = '';
@@ -48,13 +58,13 @@
                 for (var i = 0; i < data.length; i++) 
                 { 
                     s += '<details> ';
-                    s += ' <summary>试玩地址：' + data[i].url + '</summary>';
+                    s += ' <summary >试玩地址：<a href = \"' + data[i].url + '\" target=\"_blank\">'+data[i].url+'</a></summary>';
                     s += '<ul>'
-                    s += ' <li>账号：' + data[i].userName + '</li>';
-                    s += ' <li>密码：' + data[i].passWord + '</li>';
-                    s += ' <li>试玩类型：' + data[i].tryType + '</li>';
-                    s += ' <li>截至日期：' + data[i].deadLine + '</li>';
-                    s += ' <li>备注：' + data[i].reMark + '</li>';
+                    s += ' <li onclick=\'clickthis($(this))\'>账号：' + data[i].userName + '</li>';
+                    s += ' <li onclick=\'clickthis($(this))\'>密码：' + data[i].passWord + '</li>';
+                    s += ' <li onclick=\'clickthis($(this))\'>试玩类型：' + data[i].tryType + '</li>';
+                    s += ' <li onclick=\'clickthis($(this))\'>截至日期：' + data[i].deadLine + '</li>';
+                    s += ' <li onclick=\'clickthis($(this))\'>备注：' + data[i].reMark + '</li>';
                     s += '   </ul>';
                     s += '</details> ';
                 }
@@ -67,6 +77,6 @@
         });
   
      
-    });
+    });   
     </script>
 </html>
