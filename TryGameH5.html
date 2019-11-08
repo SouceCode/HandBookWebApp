@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
+    <!-- <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+
+    <script src="./JS/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./JS/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+  <div id='container'></div>
+   
+</body>
+<script>
+
+    $(document).ready(function () {
+     
+    
+        var sql = "select * from Game_Settings gs";
+                var wherestr = " where 1=1 And devices=1 ";//devices：0电脑1手机
+                var orderbystr = "    order by deadLine asc ";
+                sql += wherestr;
+                sql += orderbystr;
+              var  urlstr = "http://localhost:5000/Api/Game_Settings/GetGame_SettingsPageData?pageindex=0"+"&sqlstr="+ sql + "&size=20";
+    
+         $.ajax({
+            type: "get",
+            dataType: "json",
+            url:urlstr,
+            success: function (data) {
+                // alert(" 错误信息：" + data);
+                var f = document.getElementById("container"); 
+                var childs = f.childNodes;
+                for (var i = 0; i < childs.length; i++) {
+                    //   alert(childs[i].nodeName); 
+                    f.removeChild(childs[i]);
+                }
+              
+
+
+                var s = '';
+    
+                for (var i = 0; i < data.length; i++) 
+                { 
+                    s += '<details> ';
+                    s += ' <summary>试玩地址：' + data[i].url + '</summary>';
+                    s += '<ul>'
+                    s += ' <li>账号：' + data[i].userName + '</li>';
+                    s += ' <li>密码：' + data[i].passWord + '</li>';
+                    s += ' <li>试玩类型：' + data[i].tryType + '</li>';
+                    s += ' <li>截至日期：' + data[i].deadLine + '</li>';
+                    s += ' <li>备注：' + data[i].reMark + '</li>';
+                    s += '   </ul>';
+                    s += '</details> ';
+                }
+                 
+             $('#container').append(s);
+            },
+            error: function (XMLResponse) {
+                // alert(" 错误信息：" + XMLResponse.responseText);
+            }
+        });
+  
+     
+    });
+    </script>
+</html>
